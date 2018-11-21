@@ -2,3 +2,5 @@
 ![image](https://github.com/auto-breakfast/auto-breakfast/blob/master/image/1.jpg)
 ![image](https://github.com/auto-breakfast/auto-breakfast/blob/master/image/5664.png)
 ![image](https://github.com/auto-breakfast/auto-breakfast/blob/master/image/2018-11-21%20(2).png)
+使用晶片:PIC18F4520
+![image](https://github.com/auto-breakfast/auto-breakfast/blob/master/image/PIC18%20%E6%8E%A5%E8%85%B3%E5%9C%96.jpg)
