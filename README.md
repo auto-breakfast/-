@@ -6,7 +6,7 @@ Auto_breakfast
 ## 硬體架構
 ![image](https://github.com/auto-breakfast/auto-breakfast/blob/master/image/1.jpg)
 ## 軟體架構
-![image](https://github.com/auto-breakfast/auto-breakfast/blob/master/image/5664.png)
+![image](https://github.com/auto-breakfast/auto-breakfast/blob/master/image/2018-11-23.png)
 
 
 
