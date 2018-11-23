@@ -11,8 +11,6 @@ Auto_breakfast
 
 
 
-
-
 # 使用晶片
  ## MCU [PIC18F4520](https://github.com/auto-breakfast/auto-breakfast/raw/1105192112-patch-%E7%B5%B1%E6%95%B4/doc/39631E.pdf)
 ![](https://i.imgur.com/aAr4gja.jpg)
