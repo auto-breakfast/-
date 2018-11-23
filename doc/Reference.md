@@ -1,6 +1,7 @@
 # Auto_breakfast
 ## 核心
 * ### MCU [PIC18F4520](https://github.com/auto-breakfast/auto-breakfast/raw/1105192112-patch-%E7%B5%B1%E6%95%B4/doc/39631E.pdf)
+{%pdf https://ww1.microchip.com/downloads/en/devicedoc/39631a.pdf %}
 ![](https://i.imgur.com/aAr4gja.jpg)
 
 
