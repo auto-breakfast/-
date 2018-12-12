@@ -17,3 +17,4 @@
 
 * ### 七段顯示器 [3641AH BH](https://github.com/auto-breakfast/auto-breakfast/raw/1105192112-patch-%E7%B5%B1%E6%95%B4/doc/3641AHBH.pdf)
 ![](https://i.imgur.com/Q0l5uzM.jpg)
+模组尺寸：30×14×7.2（mm）
