@@ -8,9 +8,12 @@
 
 #include <xc.h>
 
+char uartdataBuffer[256] = {0};
+unsigned char uartdataCounter = 0;
+
 void initalUART(void) {
     
-    RCSTAbits.SPEN=0;//關
+
     
     TRISC=0x00;
     TRISCbits.RC6=1;
@@ -30,7 +33,7 @@ void initalUART(void) {
     RCSTAbits.FERR=0;
     RCSTAbits.OERR=0;
     RCSTAbits.RX9D=0;
-    
+    RCSTAbits.SPEN=1;//開
     
     BAUDCON=0x00;
     BAUDCONbits.ABDOVF=0;
@@ -40,7 +43,27 @@ void initalUART(void) {
     
     PIE1bits.RCIE=0;
     
-    RCSTAbits.SPEN=1;//開
+    /*
+    PIE1bits.TX1IE=0;      //turn off TX interrupt
+    INTCONbits.GIE=1;                   // Peripheral Interrupt disEnable bit
+    INTCONbits.PEIE=1;                  // Global Interrupt Enable bit
+    PIE1bits.RCIE=1;       //enable RX interrupt
+    RCONbits.IPEN=1;                    // turn off priority level
+    */
+}
+
+void writeUARTByte(unsigned char data)
+{
+    while (TXSTAbits.TRMT==0); /* wait if the buffer is full */
+    TXREG = data;
+}
+
+void writeUARTString(unsigned char *data, unsigned char length)
+{
+    int i;
+    for (i = 0; i < length; i++) {
+        writeUARTByte(data[i]);
+    }
 }
 
 
