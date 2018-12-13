@@ -4,8 +4,6 @@
  *
  * Created on 2018年12月5日, 下午 3:10
  */
-
-
 #include <xc.h>
 #include "uart.h"
 #pragma config OSC = HSPLL       // OSC->HSPLL ?????? 4*PLL = 10 * 4 = 40MHZ
@@ -63,23 +61,8 @@
 #pragma config EBTRB = OFF
 
 void main(void) {
-    
     initalUART();
-    TRISA=0x00;
-    unsigned char UART={0};
-    int i=-1;
     while(1){
-        if(RCIF==1){
-            UART=RCREG;
-            //uartdataBuffer[i++]=UART;
-            //RCIF=0;
-        }
         
-        if(UART=='a'){
-            TRISAbits.RA2 = 0;
-        }
-        else{
-            TRISAbits.RA2 = 1;
-        }
     }
 }

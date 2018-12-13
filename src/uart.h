@@ -1,11 +1,10 @@
 #ifndef _UART_H
 #define _UART_H
 #include <xc.h>
-extern char uartdataBuffer[256];
-extern unsigned char uartdataCounter;
+extern char uartdataBuffer[30];
+extern int i;
 
 void initalUART(void);
-void writeUARTByte(unsigned char data);
-void writeUARTString(unsigned char *data, unsigned char length);
+void interrupt UART(void);
 
 #endif
