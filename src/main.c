@@ -60,9 +60,22 @@
 //// CONFIG7H
 #pragma config EBTRB = OFF
 
+void delay(unsigned long delay_count)
+{
+    unsigned long temp;
+    for (temp = delay_count; temp > 0; temp--);
+}
+
 void main(void) {
     initalUART();
+    TRISA=0x01;
+    //char test[10]="test";
+    char *ptr;
+    ptr=uartdata;
     while(1){
-        
+        if(TXFLAG==1){
+            writeuart(uartdata);
+            TXFLAG=0;
+        }
     }
 }
