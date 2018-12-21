@@ -5,8 +5,8 @@
  * Created on 2018年12月7日, 上午 9:39
  */
 #include <xc.h>
-extern int i=0,TXFLAG=0;
-extern char uartdata[30] = {0};
+int lenght=0,TXFLAG=0;
+char uartdata[30]={0} ;
 
 void initalUART(void) {
     TRISC=0x00;
@@ -43,24 +43,32 @@ void initalUART(void) {
     INTCONbits.PEIE=1;                  // Global Interrupt Enable bit
     
 }
-
 void interrupt UART(){
+    static int i=0;
     if(PIR1bits.RCIF){
         uartdata[i++]=RCREG;
     }
     PIR1bits.RCIF=0;
-    i=0;
+    
     TXFLAG=1;
 }
 
 void writeuart(unsigned char *data){
-    int j=0;
-    while(data[j]!='\0'){
+    int i=0;
+    while(data[i]!='\0'){
         while(!TRMT);
-        TXREG=data[j];
-        j++;
+        TXREG=data[i];
+        i++;
     }
 }
 
-
-
+void gettime(){
+    if(uartdata[2] != ':' || uartdata[5] != ':'){
+//        uartdata=(void*)"error";
+//        writeuart(uartdata);
+    }
+    else{
+//        uartdata=(void *)"ok";
+//        writeuart(uartdata);
+    }
+}

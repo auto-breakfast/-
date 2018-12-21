@@ -6,6 +6,8 @@
  */
 #include <xc.h>
 #include "uart.h"
+#include "PWM.h"
+
 #pragma config OSC = HSPLL       // OSC->HSPLL ?????? 4*PLL = 10 * 4 = 40MHZ
 #pragma config FCMEN = OFF      // Fail-Safe Clock Monitor Enable bit (Fail-Safe Clock Monitor disabled)
 #pragma config IESO = OFF       // Internal/External Oscillator Switchover bit (Oscillator Switchover mode disabled)
@@ -68,13 +70,12 @@ void delay(unsigned long delay_count)
 
 void main(void) {
     initalUART();
-    TRISA=0x01;
-    //char test[10]="test";
-    char *ptr;
-    ptr=uartdata;
     while(1){
         if(TXFLAG==1){
-            writeuart(uartdata);
+           writeuart(uartdata);
+            
+//            gettime();
+            delay(10000);
             TXFLAG=0;
         }
     }
