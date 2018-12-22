@@ -72,10 +72,8 @@ void main(void) {
     initalUART();
     while(1){
         if(TXFLAG==1){
-           writeuart(uartdata);
-            
-//            gettime();
-            delay(10000);
+//            writeuart(uartdata);
+            gettime();
             TXFLAG=0;
         }
     }

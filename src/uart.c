@@ -6,7 +6,8 @@
  */
 #include <xc.h>
 int lenght=0,TXFLAG=0;
-char uartdata[30]={0} ;
+char uartdata[30]={0};
+int time[3]={0};
 
 void initalUART(void) {
     TRISC=0x00;
@@ -44,13 +45,16 @@ void initalUART(void) {
     
 }
 void interrupt UART(){
-    static int i=0;
     if(PIR1bits.RCIF){
-        uartdata[i++]=RCREG;
+        uartdata[lenght++]=RCREG;
+        
+        if(lenght == 8 || RCREG == 0){
+            lenght=0;
+            TXFLAG=1;
+        }
     }
     PIR1bits.RCIF=0;
-    
-    TXFLAG=1;
+//    TXFLAG=1;
 }
 
 void writeuart(unsigned char *data){
@@ -65,10 +69,43 @@ void writeuart(unsigned char *data){
 void gettime(){
     if(uartdata[2] != ':' || uartdata[5] != ':'){
 //        uartdata=(void*)"error";
-//        writeuart(uartdata);
+        uartdata[0]='e';
+        uartdata[1]='r';
+        uartdata[2]='r';
+        uartdata[3]='o';
+        uartdata[4]='r';
+        uartdata[5]='\0';
+        lenght=0;
+        writeuart(uartdata);
     }
     else{
 //        uartdata=(void *)"ok";
-//        writeuart(uartdata);
+//        uartdata[9]='o';
+//        uartdata[10]='k';
+//        uartdata[11]='\0';
+//        lenght=0;
+        writeuart(uartdata);
+        
+        time[0]=((int)uartdata[0]-48)*10+((int)uartdata[1]-48);
+        time[1]=((int)uartdata[3]-48)*10+((int)uartdata[4]-48);
+        time[2]=((int)uartdata[6]-48)*10+((int)uartdata[7]-48);
+        
+        if(time[0] > 24 || time[1] > 60 || time[2] > 60){
+            uartdata[0]='e';
+            uartdata[1]='r';
+            uartdata[2]='r';
+            uartdata[3]='o';
+            uartdata[4]='r';
+            uartdata[5]='\0';
+            lenght=0;
+            writeuart(uartdata);
+        }
+        else{
+            uartdata[0]='o';
+            uartdata[1]='k';
+            uartdata[2]='\0';
+            lenght=0;
+            writeuart(uartdata);
+        }
     }
 }
