@@ -28,7 +28,7 @@ void CLK_wait(void)
 {
     IIC_CLK = 1;
     delay_us(1);
-    IIC_DATA = 0;
+//    IIC_DATA = 0;
     IIC_CLK = 0;
     delay_us(1);
 }
@@ -65,13 +65,12 @@ u8 RTCread_byte(void)
         IIC_CLK = 0;
         delay_us(2);
     }
-    IIC_CE = 0;
+//    IIC_CE = 0;
     return time;
 }
 void RTCread(u8*str) {
     IIC_start();
     RTCsend_byte(0xBF);
-    IIC_CE = 0;
     RTC_DATA = 1;
     u8 t;
     IIC_CE =1;
@@ -79,7 +78,6 @@ void RTCread(u8*str) {
     {
         *(str+t)=RTCread_byte();
     }
-//    IIC_CE =0;
     RTC_DATA = 0;
     IIC_stop();
 }
@@ -97,7 +95,7 @@ void RTCsend_byte(u8 temp)
         CLK_wait();
     }
 //    IIC_NAck();
-    IIC_DATA = 0;
+//    IIC_DATA = 0;
 //    IIC_CE =0;
 }
 void RTC_write(u8*str_1)
