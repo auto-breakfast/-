@@ -76,7 +76,7 @@ void RTCread(u8*str) {
     IIC_CE =1;
     for(t=0;t<8;t++)
     {
-        *(str+t)=RTCread_byte();
+        str[t]=RTCread_byte();
     }
     RTC_DATA = 0;
     IIC_stop();
