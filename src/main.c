@@ -4,20 +4,19 @@
  *
  * Created on 2018年12月19日, 下午 4:15
  */
-
+#include <xc.h>
 #include "defines.h"
-#include <stdio.h>
-#include <stdlib.h>
+//#include <stdio.h>
+//#include <stdlib.h>
 #include <uart.h>
 #include "mydelay.h"
 #include "RTC.h"
 #include "Seven-segment display.h"
-#include <xc.h>
 //#pragma config statements should precede project file includes.
 // Use project enums instead of #define for ON and OFF.
 
 // CONFIG1H
-#pragma config OSC = INTIO67       // OSC->HSPLL ?????? 4*PLL = 10 * 4 = 40MHZ
+#pragma config OSC = HSPLL      // OSC->HSPLL ?????? 4*PLL = 10 * 4 = 40MHZ
 #pragma config FCMEN = OFF      // Fail-Safe Clock Monitor Enable bit (Fail-Safe Clock Monitor disabled)
 #pragma config IESO = OFF       // Internal/External Oscillator Switchover bit (Oscillator Switchover mode disabled)
 //
@@ -37,6 +36,11 @@
 //#pragma config MCLRE = ON       // MCLR Pin Enable bit (MCLR pin enabled; RE3 input pin disabled)
 //
 //// CONFIG4L
+
+
+
+
+
 #pragma config STVREN = ON      // Stack Full/Underflow Reset Enable bit (Stack full/underflow will cause Reset)
 #pragma config LVP = OFF        // Single-Supply ICSP Enable bit (Single-Supply ICSP disabled)
 #pragma config XINST = OFF      // Extended Instruction Set Enable bit (Instruction set extension and Indexed Addressing mode disabled (Legacy mode))
@@ -72,20 +76,25 @@
 #pragma config EBTRB = OFF
 
 
-#include <xc.h>
+//#include <xc.h>
 
-void OSC_init() // 32MHZ
+//void OSC_init() // 32MHZ
+//{
+//    OSCCONbits.IRCF2 = 1;
+//    OSCCONbits.IRCF1 = 1;
+//    OSCCONbits.IRCF0 = 1;
+//    OSCCONbits.SCS1 =0;
+//    OSCCONbits.SCS0 =0;
+//    while(!OSCCONbits.IOFS); //等待震盪穩定
+//    OSCTUNEbits.PLLEN = 1;
+//    
+//}
+void oclillator_initial()  //      Fosc = 40MHz 
 {
-    OSCCONbits.IRCF2 = 1;
-    OSCCONbits.IRCF1 = 1;
-    OSCCONbits.IRCF0 = 1;
-    OSCCONbits.SCS1 =0;
-    OSCCONbits.SCS0 =0;
-    while(!OSCCONbits.IOFS); //等待震盪穩定
-    OSCTUNEbits.PLLEN = 1;
-    
+    OSCCONbits.IOFS=0;        // turn off internal oscillator
+    OSCCONbits.SCS0=0;
+    OSCCONbits.SCS1=0;        //System Clock Select bits is primary oscillator
 }
-
 void main(void) {
     int a = 11;
     int b = 12;
@@ -94,23 +103,23 @@ void main(void) {
 //    u8 str_1[8]={0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
     u8 str[8]={0};
     u8 reciprocal[3]={0};
-    OSC_init();
+//    OSC_init();
     delay_ms(2);
     IICinit();
+    oclillator_initial();
     initalUART();
-    
-    PR2=253;
-    CCP2CON=0x2C;
-    TRISBbits.RB3=0;
-    T2CON=0x05;
-    CCPR2=0x00;
+//    PR2=253;
+//    CCP2CON=0x2C;
+//    TRISBbits.RB3=0;
+//    T2CON=0x05;
+//    CCPR2=0x00;
     
     RTC_write(str_1);
     while(1)
     {
         if(TXFLAG==1)
         {
-            writeuart(uartdata);
+//            writeuart(uartdata);
             gettime();
             TXFLAG=0;
         }
@@ -118,7 +127,7 @@ void main(void) {
         hour = (str[2]/16)*10+(str[2]%16);
         minute = (str[1]/16)*10+(str[1]%16);
         Display(hour-time[0],minute-time[1]);
-        delay_ms(10);
+//        delay_ms(10);
         if(hour-time[0]==0&&minute-time[1]&&str[0]-time[2])
         {
             

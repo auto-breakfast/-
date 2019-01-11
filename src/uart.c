@@ -1,12 +1,6 @@
-/*
- * File:   uart.c
- * Author: user
- *
- * Created on 2018年12月7日, 上午 9:39
- */
 #include <xc.h>
 int lenght=0,TXFLAG=0;
-char uartdata[30]={0};
+char uartdata[10]={0};
 int time[3]={0};
 
 void initalUART(void) {
@@ -108,4 +102,14 @@ void gettime(){
             writeuart(uartdata);
         }
     }
+    uartdata[0]='\0';
+            uartdata[1]='\0';
+            uartdata[2]='\0';
+            uartdata[3]='\0';
+            uartdata[4]='\0';
+            uartdata[5]='\0';
+            uartdata[6]='\0';
+            uartdata[7]='\0';
+            uartdata[8]='\0';
+            uartdata[9]='\0';
 }
