@@ -23,8 +23,7 @@ Auto_breakfast
  ## 藍芽模組 [HC-05](http://www.electronicaestudio.com/docs/istd016A.pdf)
 ![](https://i.imgur.com/KqQhrGO.jpg)
 
- ## 時鐘模組 [DS1307](https://github.com/auto-breakfast/auto-breakfast/raw/1105192112-patch-%E7%B5%B1%E6%95%B4/doc/DS1307.pdf)
-![](https://i.imgur.com/ii9PTMr.png)![](https://i.imgur.com/JLyXyPM.jpg)
+
 
  ## 伺服馬達 [MG995](https://github.com/auto-breakfast/auto-breakfast/raw/1105192112-patch-%E7%B5%B1%E6%95%B4/doc/MG995_Tower-Pro.pdf)
 ![](https://i.imgur.com/AbZWk9V.png)
